@@ -3,6 +3,7 @@ import Searchbar from '@/Components/Searchbar'
 import Image from 'next/image'
 import React from 'react'
 import { getAllProducts } from '@/lib/actions'
+import ProductCard from '@/Components/ProductCard'
 
 const Home = async () => {
   const products = await getAllProducts();
@@ -39,7 +40,7 @@ const Home = async () => {
       <div className='flex flex-wrap gap-x-8 gap-y-16'>
         {
           products?.map((product)=>(
-            <div>{product.title}</div>
+            <ProductCard key={product._id} product={product}/>
             ))
         }
       </div>
