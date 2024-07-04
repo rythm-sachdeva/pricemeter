@@ -3,13 +3,33 @@
 import { Fragment, useState, FormEvent } from "react";
 import { Dialog, DialogBackdrop,DialogPanel,DialogTitle,Button} from "@headlessui/react";
 import Image from "next/image";
-const Modal = () => {
+import { addUserEmailToProduct } from "@/lib/actions";
+
+interface Props {
+  productId:string
+}
+
+
+const Modal = ({productId}: Props) => {
   let [isOpen, setIsOpen] = useState(false);
   const [isSubmitting,setIssubmitting] = useState(false);
+  const [validEmail,setValidEmail] = useState(false);
+  const validateEmail= (e : React.ChangeEvent<HTMLInputElement>)=> {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setEmail(e.target.value);
+    if(emailRegex.test(e.target.value))
+      {
+        setValidEmail(true);
+       
+      }
+    else{
+      setValidEmail(false);
+    }
+  }
  const handleSubmit = async ( e: FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   setIssubmitting(true);
-  //await addUserEmailToProduct(productId,email)
+  await addUserEmailToProduct(productId,email);
    
   setIssubmitting(false)
   setEmail('')
@@ -53,7 +73,7 @@ const Modal = () => {
             width={20}
             height={20}
             onClick={closeModal}
-            className="hover:opacity-70"
+            className="hover:opacity-70 cursor-pointer"
             />
               </div>
             <div className="dialog-head_text px-2 pb-1">
@@ -81,14 +101,18 @@ const Modal = () => {
                    id="email"
                    placeholder="Enter your email address"
                    value={email}
-                   onChange={(e)=> setEmail(e.target.value)}
+                   onChange={validateEmail}
                    />
                  </div>
-    
-                </form>
+                 <div className="px-2 text-xs mt-1 ml-3 text-red-500 opacity-80">
+                 { email!=="" && !validEmail && "*Enter a valid email"}
+                 </div>
                  <button type="submit" className="dialog-btn hover:opacity-90">
                     {isSubmitting ? "Submitting...": 'Track'}
                  </button>
+    
+                </form>
+                
               </DialogTitle>
             </DialogPanel>
         </div>
