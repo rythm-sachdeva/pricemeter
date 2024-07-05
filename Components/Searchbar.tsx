@@ -7,6 +7,7 @@ const Searchbar = () => {
 
   const [SearchPrompt,setSearchPrompt] = useState('');
   const [isLoading,setIsLoading] = useState(false);
+
  const isValidAmazonProductURL = (url : string)=>{
   try {
     const parsedURL = new URL(url);
@@ -28,15 +29,17 @@ const handleSubmit= async (event: FormEvent<HTMLFormElement>)=>{
     try {
       setIsLoading(true);
       const product = await scrapeAndStoreProduct(SearchPrompt);
-    } catch (error) {
       
+
+    } catch (error) {
+
     } finally{
       setIsLoading(false);
     }
 }
 
   return (
-   <form className='flex flex-wrap gap-4 mt-12' onSubmit={handleSubmit}>
+   <form className='flex flex-wrap gap-4 mt-12' onSubmit={handleSubmit} >
     <input
     type='text'
     value={SearchPrompt}

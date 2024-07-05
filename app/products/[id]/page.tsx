@@ -24,8 +24,8 @@ const page = async ({ params: { id } }: Props) => {
           <Image
             src={product.image}
             alt={product.title}
-            width={580}
-            height={400}
+            width={480}
+            height={300}
             className="mx-auto"
           />
         </div>
@@ -33,7 +33,6 @@ const page = async ({ params: { id } }: Props) => {
           <div className="flex justify-between items-start gap-5 flex-wrap pb-6">
             <div className="flex flex-col gap-3">
               <p className="text-[28px] text-secondary font-semibold">
-                {" "}
                 {product.title}
               </p>
               <Link
