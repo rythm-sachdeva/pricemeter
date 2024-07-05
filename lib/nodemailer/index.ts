@@ -1,9 +1,10 @@
+"use server"
+
 import { EmailContent, EmailProductInfo, NotificationType } from '@/types';
 import nodemailer from 'nodemailer';
 
-export const THRESHOLD_PERCENTAGE = 40;
 
-export const Notification ={
+const Notification ={
     WELCOME: "WELCOME",
     CHANGE_OF_STOCK: "CHANGE_OF_STOCK",
     LOWEST_PRICE: "LOWEST_PRICE",
@@ -29,7 +30,7 @@ export async function generateEmailBody(
         subject = `Welcome to Price Tracking for ${shortenedTitle}`;
         body = `
           <div>
-            <h2>Welcome to PriceWise 🚀</h2>
+            <h2>Welcome to Pricemeter 🚀</h2>
             <p>You are now tracking ${product.title}.</p>
             <p>Here's an example of how you'll receive updates:</p>
             <div style="border: 1px solid #ccc; padding: 10px; background-color: #f8f8f8;">
@@ -99,7 +100,7 @@ export async function generateEmailBody(
         subject: emailContent.subject,
 
     }
-   transporter.sendMail(mailOptions,(error:any,info:any)=>{
+   await transporter.sendMail(mailOptions,(error:any,info:any)=>{
     if(error) return console.log(error);
     console.log('Email sent: ',info);
    })
