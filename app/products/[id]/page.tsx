@@ -158,16 +158,18 @@ const page = async ({ params: { id } }: Props) => {
             {product?.description?.split("\n")}
           </div>
         </div>
-        <button className="btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[200px]">
-          <Image src="/assets/icons/bag.svg" alt="Bag" height={22} width={22} />
-          <Link
+        <Link
             href={product.url}
             target="_blank"
             className="text-base text-white"
           >
+        <button className="btn w-fit mx-auto flex items-center justify-center gap-3 min-w-[200px]">
+          <Image src="/assets/icons/bag.svg" alt="Bag" height={22} width={22} />
+         
             Buy Now
-          </Link>
+         
         </button>
+        </Link>
       </div>
       {similarProducts && similarProducts?.length > 0 && (
         <div className="py-4 flex flex-col gap-2 w-full">
